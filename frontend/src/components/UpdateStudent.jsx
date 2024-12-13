@@ -19,7 +19,9 @@ const UpdateStudent = () => {
   useEffect(() => {
     const fetchStudent = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/students/${id}`);
+        const res = await axios.get(
+          `https://lab-login.onrender.com/api/students/${id}`
+        );
         // Ensure the data structure matches your formData
         setFormData({
           name: res.data.name || "",
@@ -44,7 +46,7 @@ const UpdateStudent = () => {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:5000/api/students/update/${id}`,
+        `https://lab-login.onrender.com/api/students/update/${id}`,
         formData
       );
       navigate("/students");

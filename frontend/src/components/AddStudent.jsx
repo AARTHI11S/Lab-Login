@@ -12,9 +12,9 @@ const AddStudent = () => {
     inTime: "", // Add inTime to the formData
     outTime: "",
   });
-  const inputRef = useRef(null)
-  const [isCheckin, setIsCheckin] = useState(true)
-  const [studentId, setStudentId] = useState('')
+  const inputRef = useRef(null);
+  const [isCheckin, setIsCheckin] = useState(true);
+  const [studentId, setStudentId] = useState("");
 
   const navigate = useNavigate();
 
@@ -24,11 +24,13 @@ const AddStudent = () => {
 
   const handleSubmit = async (e) => {
     // e.preventDefault();
-    const URL = isCheckin ? "http://localhost:5000/api/students/checkin" : "http://localhost:5000/api/students/checkout";
+    const URL = isCheckin
+      ? "https://lab-login.onrender.com/api/students/checkin"
+      : "https://lab-login.onrender.com/api/students/checkout";
     try {
       const response = await axios.post(URL, { studentId });
-      alert(response?.data?.message)
-      setStudentId('');
+      alert(response?.data?.message);
+      setStudentId("");
       inputRef.current.value = null;
       inputRef.current.focus();
     } catch (error) {
@@ -37,11 +39,11 @@ const AddStudent = () => {
   };
 
   useEffect(() => {
-    console.log(studentId.length)
-    inputRef.current.focus()
-    if (studentId === '' || studentId.length < 10) return
-    handleSubmit()
-  }, [studentId])
+    console.log(studentId.length);
+    inputRef.current.focus();
+    if (studentId === "" || studentId.length < 10) return;
+    handleSubmit();
+  }, [studentId]);
   return (
     <div
       className="vh-100 vw-100 d-flex justify-content-center align-items-center"
@@ -62,29 +64,33 @@ const AddStudent = () => {
             type="radio"
             name="check"
             id="check"
-            onChange={() =>{
-              setIsCheckin(true)
-              inputRef.current.focus()
+            onChange={() => {
+              setIsCheckin(true);
+              inputRef.current.focus();
             }}
             checked={isCheckin}
           />
-          <label className="cursor-pointer" htmlFor="check">Checkin</label>
+          <label className="cursor-pointer" htmlFor="check">
+            Checkin
+          </label>
         </div>
         <div className="d-flex gap-2">
           <input
             type="radio"
             name="out"
             id="out"
-            onChange={() =>{
-              setIsCheckin(false)
-              inputRef.current.focus()
+            onChange={() => {
+              setIsCheckin(false);
+              inputRef.current.focus();
             }}
             checked={!isCheckin}
           />
-          <label className="cursor-pointer" htmlFor="out">Checkout</label>
+          <label className="cursor-pointer" htmlFor="out">
+            Checkout
+          </label>
         </div>
         <h2 className="fs-1 text-center mb-4 text-decoration-underline">
-         Scan The Bar Code to CHECK-{isCheckin ? 'IN' : 'OUT'} STUDENT
+          Scan The Bar Code to CHECK-{isCheckin ? "IN" : "OUT"} STUDENT
         </h2>
         <form onSubmit={handleSubmit}>
           {/* <div className="mb-3">
@@ -98,7 +104,7 @@ const AddStudent = () => {
               required
             />
           </div> */}
-          <div className="mb-3" >
+          <div className="mb-3">
             {/* <label className="form-label">Student ID</label> */}
             <input
               type="text"
@@ -106,18 +112,18 @@ const AddStudent = () => {
               ref={inputRef}
               name="studentId"
               tabIndex={0}
-              style={{ opacity: 0, position: 'absolute', left: '-999999px' }}
+              style={{ opacity: 0, position: "absolute", left: "-999999px" }}
               value={studentId}
               onChange={(e) => setStudentId(e.target.value)}
               className="form-control"
               required
             />
           </div>
-          <div >
+          <div>
             <img
               src="https://i5.walmartimages.com/asr/4f22e2e6-607e-44c8-b2e2-62fe30fd3774_1.84bc407c843ab6eb3166c11faedc55f5.jpeg"
               alt="BAR CODE SCANNER"
-              style={{ width: '300px', height: '200px' }}
+              style={{ width: "300px", height: "200px" }}
             />
           </div>
           {/* <div className="mb-3">

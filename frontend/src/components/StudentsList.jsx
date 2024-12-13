@@ -11,7 +11,9 @@ const StudentsList = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/students/today");
+        const res = await axios.get(
+          "https://lab-login.onrender.com/api/students/today"
+        );
         setStudents(res.data);
       } catch (error) {
         console.error("Error fetching students data", error);
@@ -83,7 +85,9 @@ const StudentsList = () => {
 
 const handleDelete = async (id) => {
   try {
-    await axios.delete(`http://localhost:5000/api/students/delete/${id}`);
+    await axios.delete(
+      `https://lab-login.onrender.com/api/students/delete/${id}`
+    );
     window.location.reload();
   } catch (error) {
     console.error("Error deleting the student", error);

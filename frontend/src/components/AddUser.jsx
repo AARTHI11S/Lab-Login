@@ -21,7 +21,7 @@ const AddUser = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users/add",
+        "https://lab-login.onrender.com/api/users/add",
         formData
       );
       // Optionally check the response here if needed
