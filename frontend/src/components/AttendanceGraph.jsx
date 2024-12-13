@@ -20,7 +20,7 @@ function AttendanceGraph() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://lab-login.onrender.com/api/students/attendance-summary`,
+        `https://lablogin-1.onrender.com/api/students/attendance-summary`,
         {
           params: { month, year },
         }

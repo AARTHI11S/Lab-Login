@@ -25,8 +25,8 @@ const AddStudent = () => {
   const handleSubmit = async (e) => {
     // e.preventDefault();
     const URL = isCheckin
-      ? "https://lab-login.onrender.com/api/students/checkin"
-      : "https://lab-login.onrender.com/api/students/checkout";
+      ? "https://lablogin-1.onrender.com/api/students/checkin"
+      : "https://lablogin-1.onrender.com/api/students/checkout";
     try {
       const response = await axios.post(URL, { studentId });
       alert(response?.data?.message);

@@ -86,7 +86,7 @@ const StudentsList = () => {
 const handleDelete = async (id) => {
   try {
     await axios.delete(
-      `https://lab-login.onrender.com/api/students/delete/${id}`
+      `https://lablogin-1.onrender.com/api/students/delete/${id}`
     );
     window.location.reload();
   } catch (error) {

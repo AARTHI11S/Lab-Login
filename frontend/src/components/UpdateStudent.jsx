@@ -20,7 +20,7 @@ const UpdateStudent = () => {
     const fetchStudent = async () => {
       try {
         const res = await axios.get(
-          `https://lab-login.onrender.com/api/students/${id}`
+          `https://lablogin-1.onrender.com/api/students/${id}`
         );
         // Ensure the data structure matches your formData
         setFormData({
@@ -46,7 +46,7 @@ const UpdateStudent = () => {
     e.preventDefault();
     try {
       await axios.put(
-        `https://lab-login.onrender.com/api/students/update/${id}`,
+        `https://lablogin-1.onrender.com/api/students/update/${id}`,
         formData
       );
       navigate("/students");
