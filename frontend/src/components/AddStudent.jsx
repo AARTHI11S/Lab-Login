@@ -92,7 +92,7 @@ const AddStudent = () => {
         <h2 className="fs-1 text-center mb-4 text-decoration-underline">
           Scan The Bar Code to CHECK-{isCheckin ? "IN" : "OUT"} STUDENT
         </h2>
-        <form onSubmit={handleSubmit}>
+        {/* //<form onSubmit={handleSubmit}>*/}
           {/* <div className="mb-3">
             <label className="form-label">Name</label>
             <input
@@ -160,7 +160,7 @@ const AddStudent = () => {
           <button type="submit" className="btn btn-primary w-100">
             Add Student
           </button>*/}
-        </form>
+        {/*</form>*/}
       </div>
     </div>
   );
