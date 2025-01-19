@@ -2,6 +2,148 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import myimg from "../assets/tnau.jpeg";
+
+const AddStudent = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    studentId: "",
+    department: "",
+    inTime: "",
+    outTime: "",
+  });
+  const inputRef = useRef(null);
+  const [isCheckin, setIsCheckin] = useState(true);
+  const [studentId, setStudentId] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    const URL = isCheckin
+      ? "https://lablogin-1.onrender.com/api/students/checkin"
+      : "https://lablogin-1.onrender.com/api/students/checkout";
+    try {
+      const response = await axios.post(URL, { studentId });
+      toast.success(response?.data?.message || "Operation successful!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setStudentId("");
+      inputRef.current.value = null;
+      inputRef.current.focus();
+    } catch (error) {
+      console.error("There was an error creating the student!", error);
+      toast.error("Error occurred! Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
+  useEffect(() => {
+    inputRef.current.focus();
+    if (studentId === "" || studentId.length < 10) return;
+    handleSubmit();
+  }, [studentId]);
+
+  return (
+    <div
+      className="vh-100 vw-100 d-flex justify-content-center align-items-center"
+      style={{
+        backgroundImage: `url(${myimg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+      onClick={() => inputRef.current.focus()}
+    >
+      <ToastContainer />
+      <div
+        className="container bg-light p-5 rounded"
+        style={{ maxWidth: "600px", opacity: 0.9 }}
+      >
+        <div className="d-flex gap-2">
+          <input
+            type="radio"
+            name="check"
+            id="check"
+            onChange={() => {
+              setIsCheckin(true);
+              inputRef.current.focus();
+            }}
+            checked={isCheckin}
+          />
+          <label className="cursor-pointer" htmlFor="check">
+            Checkin
+          </label>
+        </div>
+        <div className="d-flex gap-2">
+          <input
+            type="radio"
+            name="out"
+            id="out"
+            onChange={() => {
+              setIsCheckin(false);
+              inputRef.current.focus();
+            }}
+            checked={!isCheckin}
+          />
+          <label className="cursor-pointer" htmlFor="out">
+            Checkout
+          </label>
+        </div>
+        <h2 className="fs-1 text-center mb-4 text-decoration-underline">
+          Scan The Bar Code to CHECK-{isCheckin ? "IN" : "OUT"} STUDENT
+        </h2>
+
+        <div className="mb-3">
+          <input
+            type="text"
+            autoFocus
+            ref={inputRef}
+            name="studentId"
+            tabIndex={0}
+            style={{ opacity: 0, position: "absolute", left: "-999999px" }}
+            value={studentId}
+            onChange={(e) => setStudentId(e.target.value)}
+            className="form-control"
+            required
+          />
+        </div>
+        <div>
+          <img
+            src="https://i5.walmartimages.com/asr/4f22e2e6-607e-44c8-b2e2-62fe30fd3774_1.84bc407c843ab6eb3166c11faedc55f5.jpeg"
+            alt="BAR CODE SCANNER"
+            style={{ width: "300px", height: "200px" }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AddStudent;
+
+// src/components/AddStudent.js
+/*import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import myimg from "../assets/tnau.jpeg";
 
 const AddStudent = () => {
@@ -92,20 +234,9 @@ const AddStudent = () => {
         <h2 className="fs-1 text-center mb-4 text-decoration-underline">
           Scan The Bar Code to CHECK-{isCheckin ? "IN" : "OUT"} STUDENT
         </h2>
-        {/* //<form onSubmit={handleSubmit}>*/}
-          {/* <div className="mb-3">
-            <label className="form-label">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="form-control"
-              required
-            />
-          </div> */}
+ 
           <div className="mb-3">
-            {/* <label className="form-label">Student ID</label> */}
+             <label className="form-label">Student ID</label> 
             <input
               type="text"
               autoFocus
@@ -126,7 +257,33 @@ const AddStudent = () => {
               style={{ width: "300px", height: "200px" }}
             />
           </div>
-          {/* <div className="mb-3">
+        
+      </div>
+    </div>
+  );
+};
+
+export default AddStudent;
+*/
+
+{
+  /* //<form onSubmit={handleSubmit}>*/
+}
+{
+  /* <div className="mb-3">
+            <label className="form-label">Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="form-control"
+              required
+            />
+          </div> */
+}
+{
+  /* <div className="mb-3">
             <label className="form-label">Department</label>
             <input
               type="text"
@@ -159,11 +316,8 @@ const AddStudent = () => {
           </div> 
           <button type="submit" className="btn btn-primary w-100">
             Add Student
-          </button>*/}
-        {/*</form>*/}
-      </div>
-    </div>
-  );
-};
-
-export default AddStudent;
+          </button>*/
+}
+{
+  /*</form>*/
+}

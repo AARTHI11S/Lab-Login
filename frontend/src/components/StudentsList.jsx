@@ -97,7 +97,6 @@ const handleDelete = async (id) => {
 export default StudentsList;
 */
 
-
 // src/components/StudentsList.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -160,7 +159,7 @@ const StudentsList = () => {
               <th>Department</th>
               <th>In Time</th>
               <th>Out Time</th>
-              <th>Actions</th>
+              {/* <th>Actions</th>*/}
             </tr>
           </thead>
           <tbody>
@@ -175,7 +174,7 @@ const StudentsList = () => {
                     ? new Date(student.outTime).toLocaleString()
                     : "N/A"}
                 </td>
-                <td>
+                {/*  <td>
                   <Link
                     to={`/update/${student._id}`}
                     className="btn btn-primary btn-sm mr-2"
@@ -189,7 +188,7 @@ const StudentsList = () => {
                   >
                     Delete
                   </Button>
-                </td>
+                </td>*/}
               </tr>
             ))}
           </tbody>
@@ -200,4 +199,3 @@ const StudentsList = () => {
 };
 
 export default StudentsList;
-
